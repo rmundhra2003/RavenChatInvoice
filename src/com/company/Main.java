@@ -41,13 +41,21 @@ public class Main {
     static ArrayList<String> chatHistory = new ArrayList<String>();
     static Raven raven = new Raven();
     static Scanner keyboard = new Scanner(System.in);
+    static Invoice invoice = new Invoice();
 
     public static void main(String[] args) {
+        //prompt for user info
+        invoice.getPersonalInfo();
+
 	    // prompt user for input
         promptUserInput();
 
         //display the chat history
         displayChatHistory();
+
+        //display invoice
+        invoice.setQuantity(raven.getQuestions());
+        invoice.printInvoice();
 
     }
     static void promptUserInput() {
@@ -76,7 +84,7 @@ public class Main {
             chatHistory.add(retString);
             if(retString.equalsIgnoreCase("N"))
                 break;
-            retString = "Okay!";
+            retString = "Okay! Tell me more......";
             System.out.println(retString);
             chatHistory.add(retString);
             input = keyboard.nextLine();

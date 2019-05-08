@@ -6,20 +6,15 @@ import java.util.StringTokenizer;
 
 public class Raven {
 
-    public ArrayList<String> getPositive() {
-        return positive;
-    }
-
-
     ArrayList<String> positive = new ArrayList<String>();
     ArrayList<String> negative = new ArrayList<String>();
-
-
     ArrayList<String> positiveInput = new ArrayList<String>();
     ArrayList<String> negativeInput = new ArrayList<String>();
     ArrayList<String> positiveReply = new ArrayList<String>();
     ArrayList<String> negativeReply = new ArrayList<String>();
     ArrayList<String> neutralReply = new ArrayList<String>();
+    int questions;
+
 
     public Raven() {
 
@@ -29,7 +24,12 @@ public class Raven {
         buildNegativeReply();
         buildPositiveReply();
         buildNeutralReply();
+        questions = 0;
 
+    }
+
+    public ArrayList<String> getPositive() {
+        return positive;
     }
 
     public void setPositive(ArrayList<String> positive) {
@@ -107,6 +107,8 @@ public class Raven {
         negative.add("nothing");
         negative.add("cannot");
         negative.add("can't");
+        negative.add("quit");
+        negative.add("off");
     }
     //Takes the input message and populates the positive input and negative input array list
     String scanMessage(String msg) {
@@ -119,7 +121,7 @@ public class Raven {
         // iterate st object to get more tokens from it
         while (st.hasMoreElements()) {
             String token = st.nextElement().toString();
-            token.toLowerCase();
+            token = token.toLowerCase();
             if(positive.contains(token)) {
                 positiveInput.add(token);
             } else if(negative.contains(token)) {
@@ -140,6 +142,7 @@ public class Raven {
         positiveReply.add("That's awesome!");
         positiveReply.add("So happy that you say so!");
         positiveReply.add("Glad that worked out!");
+
 
         return ;
     }
@@ -162,17 +165,32 @@ public class Raven {
     }
 
     String getPositiveReply() {
+        //increment questions
+        setQuestions(getQuestions()+1);
+
         Collections.shuffle(positiveReply);
         return positiveReply.get(1);
     }
     String getNegativeReply() {
+        //increment questions
+        setQuestions(getQuestions()+1);
+
         Collections.shuffle(negativeReply);
         return negativeReply.get(1);
     }
     String getNeutralReply() {
+        //increment questions
+        setQuestions(getQuestions()+1);
+
         Collections.shuffle(neutralReply);
         return neutralReply.get(1);
     }
+    public int getQuestions() {
+        return questions;
+    }
 
+    public void setQuestions(int questions) {
+        this.questions = questions;
+    }
 
 }
